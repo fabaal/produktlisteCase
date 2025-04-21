@@ -1,6 +1,29 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ProduktSide>
-@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
-@{
+﻿ 
+@inherits UmbracoViewPage<ProduktSide>
+ @{
 	Layout = null;
-}
+    var products = Model.Children();
+} 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/output.css" rel="stylesheet">
+    <title>Umbraco og Tailwind case </title>
+</head>
+<body>
+   <section class="max-w-6xl mx-auto px-4 py-8">
+     <h1 class="text-3xl font-bold text-center mb-10">@Model.Sidetitel</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        @foreach (var product in products)
+        {
+             @await Html.PartialAsync("ProductItem", product)
+        }
+    </div>
+   </section>
+</body>
+</html>
+
+

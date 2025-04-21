@@ -1,1 +1,39 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+﻿
+@inherits UmbracoViewPage<Produkt>
+@{
+    var name = Model.Produktnavn;
+    var beskrivelse = Model.Beskrivelse?.ToString() ?? "";
+    var kortBeskrivelse = beskrivelse.Length > 100  ? beskrivelse.Substring(0, 100) + "..." : beskrivelse;
+    var pris = Model.Pris; 
+    var produktBillede = Model.Produktbillede;
+    var imageUrl = produktBillede?.GetCropUrl(width: 600, height: 600, useCropDimensions: true) ?? "https://placehold.co/600x400";
+
+}
+
+<div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.02] overflow-hidden">
+   <div class="aspect-square bg-gray-100">
+        <img src="@imageUrl" alt="@name" class="w-full h-full object-cover" />
+    </div>
+     <div class="p-5 flex flex-col h-full">
+       @if (!string.IsNullOrWhiteSpace(name)) {
+            <h3 class="text-xl font-semibold mb-2 text-gray-800">@name</h3>
+        }else{
+             <h3 class="text-xl font-semibold mb-2 text-gray-800">Produktnavn mangler</h3>
+        }
+        @if (!string.IsNullOrWhiteSpace(beskrivelse))
+        {
+            <p class="text-gray-600 text-sm mb-4 line-clamp-3">@Html.Raw(kortBeskrivelse)</p>
+        }else{
+            <p class="text-gray-400 text-sm italic">Ingen beskrivelse</p>
+        }
+        @if (pris > 0)
+        {
+            <div class="mt-2 text-indigo-600 font-bold">@pris.ToString("0.00") kr.</div>
+        }
+        else
+        {
+            <div class="mt-2 text-gray-400">Pris ikke tilgængelig</div>
+        }
+        
+    </div>
+</div>

@@ -1,6 +1,3 @@
-# fabaal-UmbracoTailwindCase
-
-
 # Produktliste - Case 
 
 Dette projekt demonstrerer en simple moderne og minimalistisk produktliste-hjemmeside bygget med Umbraco og Tailwind CSS. Løsningen viser, hvordan man:

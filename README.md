@@ -38,9 +38,9 @@ Krav til løsningen
 
 Sådan kommer du igang 
  1. Clone projektet: 
-    git clone https://github.com/fabaal/fabaal-UmbracoTailwindCase.git
+    git clone https://github.com/fabaal/produktlisteCase.git
    -  Naviger til projektmappen: 
-        cd dit-projekt
+        cd dit-projekt/umbraco
    -  Kør projektet: 
         dotnet run
 

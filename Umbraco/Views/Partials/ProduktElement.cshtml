@@ -1,20 +1,29 @@
 ﻿
 @inherits UmbracoViewPage<Produkt>
 @{
+    var produktBillede = Model.Produktbillede;
+    var imageUrl = produktBillede?.GetCropUrl(600);
     var name = Model.Produktnavn;
-    var beskrivelse = Model.Beskrivelse?.ToString() ?? "";
+    var beskrivelse = Model.Beskrivelse?.ToString() ?? string.Empty;
     var kortBeskrivelse = beskrivelse.Length > 100  ? beskrivelse.Substring(0, 100) + "..." : beskrivelse;
     var pris = Model.Pris; 
-    var produktBillede = Model.Produktbillede;
-    var imageUrl = produktBillede?.GetCropUrl(width: 600, height: 600, useCropDimensions: true) ?? "https://placehold.co/600x400";
-
 }
 
 <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.02] overflow-hidden">
-   <div class="aspect-square bg-gray-100">
-        <img src="@imageUrl" alt="@name" class="w-full h-full object-cover" />
-    </div>
-     <div class="p-5 flex flex-col h-full">
+    @if (!string.IsNullOrWhiteSpace(imageUrl))
+    {
+        <div class="aspect-square bg-gray-100">
+            <img src="@imageUrl" alt="@name" class="w-full h-full object-cover" />
+        </div>
+    }
+    else
+    {
+        <div class="aspect-square bg-gray-100 flex items-center justify-center text-gray-400 text-sm">
+            <img src="https://placehold.co/600x400" alt="placeholder image 600x400" class="w-full h-full object-cover" />
+        </div>
+    }
+
+    <div class="p-5 flex flex-col h-full">
        @if (!string.IsNullOrWhiteSpace(name)) {
             <h3 class="text-xl font-semibold mb-2 text-gray-800">@name</h3>
         }else{
@@ -34,6 +43,5 @@
         {
             <div class="mt-2 text-gray-400">Pris ikke tilgængelig</div>
         }
-        
     </div>
 </div>

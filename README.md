@@ -40,7 +40,7 @@ Sådan kommer du igang
  1. Clone projektet: 
     git clone https://github.com/fabaal/produktlisteCase.git
    -  Naviger til projektmappen: 
-        cd dit-projekt/umbraco
+        cd produktlisteCase/umbraco
    -  Kør projektet: 
         dotnet run
 
